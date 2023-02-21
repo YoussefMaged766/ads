@@ -4,9 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.example.ads.R
 import com.example.ads.databinding.AdItemBinding
 import com.example.ads.model.Ads
 
@@ -15,7 +17,7 @@ class AdAdapter(var items : List<Ads>) : RecyclerView.Adapter<AdAdapter.viewhold
 
     class viewholder(var binding: AdItemBinding) :ViewHolder(binding.root){
         fun bind(data :Ads){
-            Glide.with(binding.root.context).load(data.imgURL).into(binding.adImage)
+            Glide.with(binding.root.context).load(data.imgURL).placeholder(R.drawable.baseline_home_24).into(binding.adImage)
             binding.txtDesc.text = data.description
             binding.txtPrice.text = data.price.toString()
             Log.e( "bind12: ",data.description.toString() )
@@ -35,6 +37,10 @@ class AdAdapter(var items : List<Ads>) : RecyclerView.Adapter<AdAdapter.viewhold
     override fun onBindViewHolder(holder: viewholder, position: Int) {
         holder.bind(items[position])
         Log.e( "getItemCount: ",itemCount.toString() )
+        holder.itemView.setOnClickListener {
+            Toast.makeText(holder.binding.root.context, "showed", Toast.LENGTH_SHORT).show()
+            Log.e( "onBindViewHolder: ","show" )
+        }
 
     }
 }

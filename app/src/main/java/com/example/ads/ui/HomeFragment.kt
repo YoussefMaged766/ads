@@ -52,9 +52,10 @@ lateinit var layoutManager: LinearLayoutManager
             it.let {
                 when(it.status){
                     Status.SUCCESS->{
-                        adapter = AdAdapter(it.data!!)
-                        binding.recycleAds.adapter =adapter
+                        adapter = AdAdapter(listOf(Ads()))
                         binding.recycleAds.layoutManager = LinearLayoutManager(requireContext())
+                        binding.recycleAds.adapter =adapter
+                        Log.e( "onViewCreated12: ",it.data.toString() )
 
                     }
                     Status.LOADING->{}
